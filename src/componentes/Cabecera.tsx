@@ -1,23 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ISO_19011 } from '../datos/normas';
 
 export function Cabecera() {
   const [abierto, setAbierto] = useState(false);
+  const [submenuAbierto, setSubmenuAbierto] = useState(false);
   const { pathname } = useLocation();
+  const cabecera = useRef<HTMLElement>(null);
 
-  // Al navegar, cierra el menú móvil.
-  useEffect(() => setAbierto(false), [pathname]);
+  const cerrarTodo = () => {
+    setAbierto(false);
+    setSubmenuAbierto(false);
+  };
 
-  // Escape cierra el menú y devuelve el foco al botón.
+  // Al navegar, cierra el menú móvil y el desplegable.
+  useEffect(cerrarTodo, [pathname]);
+
+  // Escape cierra; un clic fuera de la cabecera también.
   useEffect(() => {
-    if (!abierto) return;
+    if (!abierto && !submenuAbierto) return;
+
     const alPulsar = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setAbierto(false);
+      if (e.key === 'Escape') cerrarTodo();
     };
+    const alClicarFuera = (e: PointerEvent) => {
+      if (!cabecera.current?.contains(e.target as Node)) cerrarTodo();
+    };
+
     document.addEventListener('keydown', alPulsar);
-    return () => document.removeEventListener('keydown', alPulsar);
-  }, [abierto]);
+    document.addEventListener('pointerdown', alClicarFuera);
+    return () => {
+      document.removeEventListener('keydown', alPulsar);
+      document.removeEventListener('pointerdown', alClicarFuera);
+    };
+  }, [abierto, submenuAbierto]);
 
   const enNorma = pathname.startsWith('/iso-19011');
 
@@ -34,7 +50,7 @@ export function Cabecera() {
         </div>
       </div>
 
-      <header className="cabecera">
+      <header className="cabecera" ref={cabecera}>
         <div className="contenedor">
           <Link className="logo" to="/">
             <span className="marca" aria-hidden="true">
@@ -67,10 +83,19 @@ export function Cabecera() {
               </li>
 
               <li className={`tiene-hijos${enNorma ? ' activo' : ''}`}>
-                <button type="button" aria-haspopup="true">
+                <button
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded={submenuAbierto}
+                  aria-controls="submenu-iso-19011"
+                  onClick={() => setSubmenuAbierto((v) => !v)}
+                >
                   ISO 19011
                 </button>
-                <ul className="submenu">
+                <ul
+                  className={`submenu${submenuAbierto ? ' abierto' : ''}`}
+                  id="submenu-iso-19011"
+                >
                   {ISO_19011.secciones.map((s) => (
                     <li key={s.slug}>
                       <Link to={`/iso-19011/${s.slug}`}>{s.rotulo}</Link>

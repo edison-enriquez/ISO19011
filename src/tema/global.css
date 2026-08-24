@@ -199,6 +199,30 @@ a:hover { color: var(--enlace-hover); text-decoration: underline; }
   border-top: 3px solid var(--acento);
   border-radius: var(--radio);
   box-shadow: var(--sombra-lg);
+
+  /* Oculto por defecto. Sin esto el panel queda permanentemente abierto y
+     tapa el contenido y el índice lateral. */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+/* Apertura por puntero, solo en escritorio y con ratón de verdad. */
+@media (hover: hover) and (min-width: 941px) {
+  .nav li:hover > .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
+/* Apertura por teclado y por clic (React marca .abierto). */
+.nav li:focus-within > .submenu,
+.nav .submenu.abierto {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
 }
 .nav .submenu a {
   display: block;
@@ -790,13 +814,21 @@ details.faq .respuesta p:last-child { margin-bottom: 0; }
     width: 100%;
     text-align: left;
   }
+  /* En móvil el submenú es un acordeón dentro del panel, no una capa
+     flotante: se pliega con display para que no ocupe alto cuando cierra. */
   .nav .submenu {
     position: static;
     box-shadow: none;
     border: 0;
     min-width: 0;
     padding: 4px 0 10px 12px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+    display: none;
   }
+  .nav .submenu.abierto { display: block; }
   .hero-grid { grid-template-columns: 1fr; gap: 32px; }
   .hero h1 { font-size: 33px; }
   .franja-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }

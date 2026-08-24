@@ -34,7 +34,9 @@
   /* --- Derivados: texto --- */
   --texto: var(--uao-tinta);
   --texto-suave: #55504b;
-  --texto-tenue: #7d766f;
+  /* 5.1:1 sobre blanco. El valor anterior (#7d766f) daba 4.47:1 y no
+     alcanzaba el mínimo AA para texto normal. */
+  --texto-tenue: #6f6862;
   --texto-inverso: #ffffff;
   --texto-inverso-suave: #eddfe2;
 
