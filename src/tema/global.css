@@ -581,6 +581,9 @@ a.tarjeta:hover {
   color: inherit;
 }
 .phva div p { margin: 0; font-size: 14.5px; line-height: 1.55; }
+/* .contenido strong pinta de vinotinto, que sobre estos fondos de marca da
+   1:1 y desaparece. Dentro del ciclo PHVA el énfasis hereda el blanco. */
+.phva strong { color: inherit; }
 .phva .p { background: var(--uao-vino); }
 .phva .h { background: var(--uao-vino-alt); }
 .phva .v { background: #9c4a1a; }
@@ -766,6 +769,15 @@ details.faq .respuesta p:last-child { margin-bottom: 0; }
 .centro { text-align: center; }
 .sin-margen-sup { margin-top: 0 !important; }
 .texto-menor { font-size: 14.5px; color: var(--texto-suave); }
+
+/* --texto-suave está calculado para fondos claros. Sobre las superficies
+   oscuras de marca da 1.37:1 y es ilegible, así que ahí se reaclara. */
+.pie .texto-menor,
+.hero .texto-menor,
+.cta .texto-menor,
+.widget-destacado .texto-menor {
+  color: #dcc0c7;
+}
 
 .aviso-fuente {
   background: var(--caja-aviso-fondo);
