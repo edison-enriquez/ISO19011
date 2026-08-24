@@ -1,0 +1,28 @@
+{
+  "name": "normas-auditoria-sgsi",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Guía divulgativa sobre ISO 19011:2018 y su aplicación a la auditoría de sistemas de gestión de seguridad de la información.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}
