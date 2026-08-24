@@ -589,6 +589,81 @@ a.tarjeta:hover {
 .phva .v { background: #9c4a1a; }
 .phva .a { background: var(--uao-rojo-osc); }
 
+/* ==========================================================================
+   Figura de flujo (SVG en el contenido)
+   ========================================================================== */
+.figura-flujo {
+  margin: 30px 0 34px;
+  padding: 0;
+}
+.figura-flujo .svg-flujo {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Por debajo de este ancho el texto del SVG se vuelve ilegible, así que
+     la figura deja de encogerse y el contenedor pasa a desplazarse. */
+  min-width: 620px;
+}
+/* Envoltorio de desplazamiento en pantallas estrechas. */
+.figura-flujo {
+  overflow-x: auto;
+}
+.figura-flujo figcaption {
+  margin-top: 14px;
+  font-size: 14.6px;
+  color: var(--texto-suave);
+  line-height: 1.6;
+  border-left: 3px solid var(--acento);
+  padding-left: 14px;
+  min-width: 620px;
+}
+.figura-flujo figcaption .texto-menor { display: block; margin-top: 4px; }
+
+.svg-flujo .fase {
+  font-family: var(--fuente);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  fill: var(--uao-vino);
+}
+.svg-flujo .caja rect {
+  fill: var(--fondo);
+  stroke: var(--uao-vino);
+  stroke-width: 1.5;
+}
+.svg-flujo .caja text {
+  font-family: var(--fuente);
+  font-size: 13px;
+  fill: var(--texto);
+}
+.svg-flujo .caja-opcional rect {
+  stroke: var(--acento);
+  stroke-dasharray: 6 4;
+  fill: var(--acento-tenue);
+}
+.svg-flujo .flecha path {
+  fill: none;
+  stroke: var(--texto-suave);
+  stroke-width: 1.6;
+}
+.svg-flujo .flecha-disc path {
+  stroke: var(--acento);
+  stroke-dasharray: 7 5;
+}
+.svg-flujo .punta { fill: var(--texto-suave); }
+.svg-flujo .punta-disc { fill: var(--acento); }
+.svg-flujo .separador {
+  stroke: var(--borde-fuerte);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 5;
+}
+.svg-flujo .banda {
+  font-family: var(--fuente);
+  font-size: 12.5px;
+  font-style: italic;
+  fill: var(--texto-tenue);
+}
+
 .indice-pagina {
   background: var(--fondo-suave);
   border: 1px solid var(--borde);
